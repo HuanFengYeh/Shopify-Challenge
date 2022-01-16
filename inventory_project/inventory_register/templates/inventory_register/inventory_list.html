@@ -1,0 +1,45 @@
+{% extends "inventory_register/base.html" %}
+
+
+{% block content %}
+<table class="table table-borderless">
+    <thead class="border-bottom front-wight-bold">
+        <tr>
+            <td>Item</td>
+            <td>Image</td>
+            <td>Quantity</td>
+            <td>
+                <a href="{% url 'inventory_insert' %}" class="btn btn-outline-success">
+                    <i class="far fa-plus-square"></i> Add
+                </a>
+
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inventory in inventory_list %}
+            <tr>
+                <td>{{inventory.itemname}}</td>
+                {% if inventory.image %}
+                <td>
+                    <img src="{{ inventory.image.url }}"/>
+                </td>
+                {% endif %}
+                <td>{{inventory.quantity}}</td>
+                <td>
+                    <a href="{% url 'inventory_update' inventory.id %}" class="btn text-secondary px-0">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form action="{% url 'inventory_delete' inventory.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

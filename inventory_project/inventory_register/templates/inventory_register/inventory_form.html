@@ -1,0 +1,32 @@
+{% extends "inventory_register/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action="" method="post" autocomplete="off" enctype="multipart/form-data">
+  {%csrf_token%}
+  <div class="row">
+    <div class="col-md-6">
+      {{form.itemname|as_crispy_field}}
+    </div>
+    <div class="col-md-6">
+      {{form.quantity|as_crispy_field}}
+    </div>
+  </div>
+  <div>
+    {{form.image|as_crispy_field}}
+  </div>
+  <div class="row">
+      <div class="col-md-8">
+          <button type="submit" class="btn btn-success btn-block btn-lg">
+              <i class="far fa-save"></i>Submit</button>
+      </div>
+      <div class="col-md-4">
+          <a href="{% url 'inventory_list' %}" class="btn btn-secondart btn-block btn-lg">
+              <i class="fas fa-stream"></i> Back to list
+          </a>
+      </div>
+  </div>
+
+</form>
+
+{% endblock content %}
